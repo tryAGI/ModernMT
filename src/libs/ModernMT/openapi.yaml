@@ -1,0 +1,528 @@
+openapi: 3.0.3
+info:
+  title: ModernMT
+  description: ModernMT adaptive machine translation API with translation memories, glossaries, and quality estimation.
+  version: "1.0"
+servers:
+  - url: https://api.modernmt.com
+security:
+  - BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    TranslateRequest:
+      type: object
+      required: [source, target, q]
+      properties:
+        source:
+          type: string
+          description: Source language code (e.g., "en")
+        target:
+          type: string
+          description: Target language code (e.g., "it")
+        q:
+          type: string
+          description: Text to translate
+        hints:
+          type: string
+          description: Comma-separated memory IDs for adaptive translation
+        priority:
+          type: string
+          enum: [normal, background]
+          description: Translation priority
+        multiline:
+          type: boolean
+          description: Whether to treat the text as multiline
+        format:
+          type: string
+          enum: [text, html]
+          description: Text format
+        alt_translations:
+          type: integer
+          description: Number of alternative translations to return
+        mask_profanities:
+          type: boolean
+          description: Whether to mask profanities
+    TranslateResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            translation:
+              type: string
+            billedCharacters:
+              type: integer
+            characters:
+              type: integer
+            detectedLanguage:
+              type: string
+            altTranslations:
+              type: array
+              items:
+                type: string
+            contextVector:
+              type: string
+    BatchTranslateRequest:
+      type: object
+      required: [source, target, q, webhook]
+      properties:
+        source:
+          type: string
+        target:
+          type: string
+        q:
+          type: array
+          items:
+            type: string
+        webhook:
+          type: string
+          description: Webhook URL for batch completion callback
+        metadata:
+          type: object
+          description: Optional metadata passed through to webhook
+        hints:
+          type: string
+        priority:
+          type: string
+          enum: [normal, background]
+    BatchTranslateResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            enqueued:
+              type: boolean
+    DetectLanguageRequest:
+      type: object
+      required: [q]
+      properties:
+        q:
+          type: string
+          description: Text to detect language of
+        format:
+          type: string
+          enum: [text, html]
+    DetectLanguageResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            detectedLanguage:
+              type: string
+            billedCharacters:
+              type: integer
+    QualityEstimationRequest:
+      type: object
+      required: [source, target, sentence, translation]
+      properties:
+        source:
+          type: string
+        target:
+          type: string
+        sentence:
+          type: string
+        translation:
+          type: string
+    QualityEstimationResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            score:
+              type: number
+              format: float
+              description: Quality score from 0.0 to 1.0
+    LanguagesResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: array
+          items:
+            type: string
+    Memory:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        creationDate:
+          type: string
+          format: date-time
+    MemoryResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          $ref: '#/components/schemas/Memory'
+    MemoriesResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Memory'
+    CreateMemoryRequest:
+      type: object
+      required: [name]
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        external_id:
+          type: string
+    UpdateMemoryRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    AddContentRequest:
+      type: object
+      required: [source, target, sentence, translation]
+      properties:
+        source:
+          type: string
+        target:
+          type: string
+        sentence:
+          type: string
+        translation:
+          type: string
+        tuid:
+          type: string
+        session:
+          type: string
+    ImportJobResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            memory:
+              type: integer
+            size:
+              type: integer
+            progress:
+              type: number
+              format: float
+    AddGlossaryRequest:
+      type: object
+      required: [type, terms]
+      properties:
+        type:
+          type: string
+          enum: [unidirectional, equivalent]
+        tuid:
+          type: string
+        terms:
+          type: array
+          items:
+            type: object
+            properties:
+              term:
+                type: string
+              language:
+                type: string
+    ContextVectorRequest:
+      type: object
+      required: [source, targets, text]
+      properties:
+        source:
+          type: string
+        targets:
+          type: array
+          items:
+            type: string
+        text:
+          type: string
+        hints:
+          type: string
+        limit:
+          type: integer
+    ContextVectorResponse:
+      type: object
+      properties:
+        status:
+          type: integer
+        data:
+          type: object
+          properties:
+            source:
+              type: string
+            vectors:
+              type: object
+              additionalProperties:
+                type: string
+paths:
+  /translate/languages:
+    get:
+      operationId: listLanguages
+      summary: List supported languages
+      responses:
+        '200':
+          description: List of language codes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguagesResponse'
+  /translate:
+    post:
+      operationId: translate
+      summary: Translate text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TranslateRequest'
+      responses:
+        '200':
+          description: Translation result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TranslateResponse'
+  /translate/batch:
+    post:
+      operationId: translateBatch
+      summary: Submit batch translation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchTranslateRequest'
+      responses:
+        '200':
+          description: Batch enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchTranslateResponse'
+  /translate/detect:
+    post:
+      operationId: detectLanguage
+      summary: Detect language of text
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DetectLanguageRequest'
+      responses:
+        '200':
+          description: Detected language
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DetectLanguageResponse'
+  /translate/qe:
+    post:
+      operationId: qualityEstimation
+      summary: Estimate translation quality
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/QualityEstimationRequest'
+      responses:
+        '200':
+          description: Quality score
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/QualityEstimationResponse'
+  /context-vector:
+    post:
+      operationId: getContextVector
+      summary: Generate context vector for adaptive translation
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContextVectorRequest'
+      responses:
+        '200':
+          description: Context vector
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContextVectorResponse'
+  /memories:
+    get:
+      operationId: listMemories
+      summary: List translation memories
+      responses:
+        '200':
+          description: List of memories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoriesResponse'
+    post:
+      operationId: createMemory
+      summary: Create a translation memory
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMemoryRequest'
+      responses:
+        '200':
+          description: Created memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryResponse'
+  /memories/{id}:
+    get:
+      operationId: getMemory
+      summary: Get a translation memory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Memory details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryResponse'
+    put:
+      operationId: updateMemory
+      summary: Update a translation memory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMemoryRequest'
+      responses:
+        '200':
+          description: Updated memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryResponse'
+    delete:
+      operationId: deleteMemory
+      summary: Delete a translation memory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Deleted memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MemoryResponse'
+  /memories/{id}/content:
+    post:
+      operationId: addContent
+      summary: Add content to a translation memory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddContentRequest'
+      responses:
+        '200':
+          description: Import job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobResponse'
+  /memories/{id}/glossary:
+    post:
+      operationId: addGlossary
+      summary: Add glossary terms to a memory
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddGlossaryRequest'
+      responses:
+        '200':
+          description: Import job
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobResponse'
+  /import-jobs/{id}:
+    get:
+      operationId: getImportJob
+      summary: Get import job status
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Import job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImportJobResponse'
