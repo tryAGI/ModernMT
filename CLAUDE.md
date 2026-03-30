@@ -14,7 +14,7 @@ dotnet test src/tests/IntegrationTests/
 
 ## Auth
 
-`MMT-ApiKey` header. Constructor uses Bearer internally, converted via `PrepareRequest` hook:
+API key auth via `MMT-ApiKey` header (native via `--security-scheme`):
 
 ```csharp
 var client = new ModernMTClient(apiKey); // MODERNMT_API_KEY env var
@@ -25,7 +25,6 @@ var client = new ModernMTClient(apiKey); // MODERNMT_API_KEY env var
 - `src/libs/ModernMT/openapi.yaml` — Manually created OpenAPI 3.0.3 spec
 - `src/libs/ModernMT/generate.sh` — Runs autosdk generate on local spec
 - `src/libs/ModernMT/Generated/` — **Never edit** — auto-generated code
-- `src/libs/ModernMT/Extensions/ModernMTClient.Auth.cs` — Auth hook (Bearer → MMT-ApiKey)
 - `src/libs/ModernMT/Extensions/ModernMTClient.Tools.cs` — MEAI `AIFunction` tools
 - `src/tests/IntegrationTests/Examples/` — Example tests
 
@@ -49,5 +48,5 @@ AIFunction tools for use with any `IChatClient`:
 ## Spec Notes
 
 - Base URL: `https://api.modernmt.com`
-- Auth: `MMT-ApiKey` header — `PrepareRequest` hook rewrites `Bearer → MMT-ApiKey`
+- Auth: `MMT-ApiKey` header — native via `--security-scheme ApiKey:Header:MMT-ApiKey`
 - Manual spec (no public OpenAPI spec exists)
