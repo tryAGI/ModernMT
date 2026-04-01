@@ -207,7 +207,6 @@ namespace ModernMT
             string? session = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::ModernMT.AddContentRequest
             {
                 Source = source,

@@ -193,7 +193,6 @@ namespace ModernMT
             global::ModernMT.DetectLanguageRequestFormat? format = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::ModernMT.DetectLanguageRequest
             {
                 Q = q,

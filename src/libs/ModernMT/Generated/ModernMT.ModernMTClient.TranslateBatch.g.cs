@@ -205,7 +205,6 @@ namespace ModernMT
             global::ModernMT.BatchTranslateRequestPriority? priority = default,
             global::System.Threading.CancellationToken cancellationToken = default)
         {
-
             var __request = new global::ModernMT.BatchTranslateRequest
             {
                 Source = source,
