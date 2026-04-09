@@ -6,6 +6,7 @@ namespace ModernMT
     public sealed partial class ModernMTClient
     {
         /// <inheritdoc cref="ModernMTClient(global::System.Net.Http.HttpClient?, global::System.Uri?, global::System.Collections.Generic.List{global::ModernMT.EndPointAuthorization}?, bool)"/>
+
         public ModernMTClient(
             string apiKey,
             global::System.Net.Http.HttpClient? httpClient = null,

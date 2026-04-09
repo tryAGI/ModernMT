@@ -5,6 +5,25 @@ namespace ModernMT
 {
     public partial class ModernMTClient
     {
+
+
+        private static readonly global::ModernMT.EndPointSecurityRequirement s_TranslateBatchSecurityRequirement0 =
+            new global::ModernMT.EndPointSecurityRequirement
+            {
+                Authorizations = new global::ModernMT.EndPointAuthorizationRequirement[]
+                {                    new global::ModernMT.EndPointAuthorizationRequirement
+                    {
+                        Type = "ApiKey",
+                        Location = "Header",
+                        Name = "MMT-ApiKey",
+                        FriendlyName = "ApiKeyInHeader",
+                    },
+                },
+            };
+        private static readonly global::ModernMT.EndPointSecurityRequirement[] s_TranslateBatchSecurityRequirements =
+            new global::ModernMT.EndPointSecurityRequirement[]
+            {                s_TranslateBatchSecurityRequirement0,
+            };
         partial void PrepareTranslateBatchArguments(
             global::System.Net.Http.HttpClient httpClient,
             global::ModernMT.BatchTranslateRequest request);
@@ -40,9 +59,15 @@ namespace ModernMT
                 httpClient: HttpClient,
                 request: request);
 
+
+            var __authorizations = global::ModernMT.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_TranslateBatchSecurityRequirements,
+                operationName: "TranslateBatchAsync");
+
             var __pathBuilder = new global::ModernMT.PathBuilder(
                 path: "/translate/batch",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Post,
@@ -52,7 +77,7 @@ namespace ModernMT
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")

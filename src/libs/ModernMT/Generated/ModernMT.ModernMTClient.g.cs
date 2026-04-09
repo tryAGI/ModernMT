@@ -13,7 +13,7 @@ namespace ModernMT
         /// <summary>
         /// 
         /// </summary>
-        public const string DefaultBaseUrl = "https://api.modernmt.com";
+        public const string DefaultBaseUrl = "https://api.modernmt.com/";
 
         private bool _disposeHttpClient = true;
 

@@ -5,6 +5,25 @@ namespace ModernMT
 {
     public partial class ModernMTClient
     {
+
+
+        private static readonly global::ModernMT.EndPointSecurityRequirement s_GetMemorySecurityRequirement0 =
+            new global::ModernMT.EndPointSecurityRequirement
+            {
+                Authorizations = new global::ModernMT.EndPointAuthorizationRequirement[]
+                {                    new global::ModernMT.EndPointAuthorizationRequirement
+                    {
+                        Type = "ApiKey",
+                        Location = "Header",
+                        Name = "MMT-ApiKey",
+                        FriendlyName = "ApiKeyInHeader",
+                    },
+                },
+            };
+        private static readonly global::ModernMT.EndPointSecurityRequirement[] s_GetMemorySecurityRequirements =
+            new global::ModernMT.EndPointSecurityRequirement[]
+            {                s_GetMemorySecurityRequirement0,
+            };
         partial void PrepareGetMemoryArguments(
             global::System.Net.Http.HttpClient httpClient,
             ref int id);
@@ -37,9 +56,15 @@ namespace ModernMT
                 httpClient: HttpClient,
                 id: ref id);
 
+
+            var __authorizations = global::ModernMT.EndPointSecurityResolver.ResolveAuthorizations(
+                availableAuthorizations: Authorizations,
+                securityRequirements: s_GetMemorySecurityRequirements,
+                operationName: "GetMemoryAsync");
+
             var __pathBuilder = new global::ModernMT.PathBuilder(
                 path: $"/memories/{id}",
-                baseUri: HttpClient.BaseAddress); 
+                baseUri: HttpClient.BaseAddress);
             var __path = __pathBuilder.ToString();
             using var __httpRequest = new global::System.Net.Http.HttpRequestMessage(
                 method: global::System.Net.Http.HttpMethod.Get,
@@ -49,7 +74,7 @@ namespace ModernMT
             __httpRequest.VersionPolicy = global::System.Net.Http.HttpVersionPolicy.RequestVersionOrHigher;
 #endif
 
-            foreach (var __authorization in Authorizations)
+            foreach (var __authorization in __authorizations)
             {
                 if (__authorization.Type == "Http" ||
                     __authorization.Type == "OAuth2")
