@@ -26,6 +26,7 @@ namespace ModernMT
             Authorizations.Add(new global::ModernMT.EndPointAuthorization
             {
                 Type = "ApiKey",
+                SchemeId = "ApikeyMmtApikey",
                 Location = "Header",
                 Name = "MMT-ApiKey",
                 Value = apiKey,
