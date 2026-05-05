@@ -22,6 +22,20 @@ namespace ModernMT
         /// Add content to a translation memory
         /// </summary>
         /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <param name="requestOptions">Per-request overrides such as headers, query parameters, timeout, retries, and response buffering.</param>
+        /// <param name="cancellationToken">The token to cancel the operation with</param>
+        /// <exception cref="global::ModernMT.ApiException"></exception>
+        global::System.Threading.Tasks.Task<global::ModernMT.AutoSDKHttpResponse<global::ModernMT.ImportJobResponse>> AddContentAsResponseAsync(
+            int id,
+
+            global::ModernMT.AddContentRequest request,
+            global::ModernMT.AutoSDKRequestOptions? requestOptions = default,
+            global::System.Threading.CancellationToken cancellationToken = default);
+        /// <summary>
+        /// Add content to a translation memory
+        /// </summary>
+        /// <param name="id"></param>
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <param name="sentence"></param>
