@@ -102,5 +102,6 @@ namespace ModernMT
         public BatchTranslateRequest()
         {
         }
+
     }
 }

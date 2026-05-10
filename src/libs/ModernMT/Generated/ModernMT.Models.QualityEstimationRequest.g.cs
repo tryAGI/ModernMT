@@ -70,5 +70,6 @@ namespace ModernMT
         public QualityEstimationRequest()
         {
         }
+
     }
 }

@@ -52,5 +52,6 @@ namespace ModernMT
         public DetectLanguageRequest()
         {
         }
+
     }
 }

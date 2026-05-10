@@ -84,5 +84,6 @@ namespace ModernMT
         public TranslateResponseData()
         {
         }
+
     }
 }

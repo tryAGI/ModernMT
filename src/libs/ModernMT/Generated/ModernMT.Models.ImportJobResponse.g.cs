@@ -48,5 +48,6 @@ namespace ModernMT
         public ImportJobResponse()
         {
         }
+
     }
 }
