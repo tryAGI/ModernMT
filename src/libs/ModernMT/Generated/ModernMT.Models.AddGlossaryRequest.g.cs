@@ -60,5 +60,6 @@ namespace ModernMT
         public AddGlossaryRequest()
         {
         }
+
     }
 }
