@@ -66,5 +66,6 @@ namespace ModernMT
         public Memory()
         {
         }
+
     }
 }

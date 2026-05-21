@@ -39,5 +39,6 @@ namespace ModernMT
         public BatchTranslateResponseData()
         {
         }
+
     }
 }

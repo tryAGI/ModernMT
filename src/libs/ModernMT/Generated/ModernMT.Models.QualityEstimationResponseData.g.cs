@@ -41,5 +41,6 @@ namespace ModernMT
         public QualityEstimationResponseData()
         {
         }
+
     }
 }
