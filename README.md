@@ -19,6 +19,13 @@ using ModernMT;
 using var client = new ModernMTClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global ModernMT.CLI --prerelease
+modern-mt api --help
+```
+
 <!-- EXAMPLES:START -->
 <!-- EXAMPLES:END -->
 
