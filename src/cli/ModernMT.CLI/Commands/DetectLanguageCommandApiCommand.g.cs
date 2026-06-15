@@ -87,7 +87,7 @@ internal static partial class DetectLanguageCommandApiCommand
                             global::ModernMT.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var q = parseResult.GetRequiredValue(Q);
-                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : __requestBase is not null ? __requestBase.Format : default;
+                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

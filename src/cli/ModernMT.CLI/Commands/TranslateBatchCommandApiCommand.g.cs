@@ -128,9 +128,9 @@ internal static partial class TranslateBatchCommandApiCommand
                         var target = parseResult.GetRequiredValue(Target);
                         var q = parseResult.GetRequiredValue(Q);
                         var webhook = parseResult.GetRequiredValue(Webhook);
-                        var metadata = CliRuntime.WasSpecified(parseResult, Metadata) ? parseResult.GetValue(Metadata) : __requestBase is not null ? __requestBase.Metadata : default;
-                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : __requestBase is not null ? __requestBase.Hints : default;
-                        var priority = CliRuntime.WasSpecified(parseResult, Priority) ? parseResult.GetValue(Priority) : __requestBase is not null ? __requestBase.Priority : default;
+                        var metadata = CliRuntime.WasSpecified(parseResult, Metadata) ? parseResult.GetValue(Metadata) : (__requestBase is { } __MetadataBaseValue ? __MetadataBaseValue.Metadata : default);
+                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : (__requestBase is { } __HintsBaseValue ? __HintsBaseValue.Hints : default);
+                        var priority = CliRuntime.WasSpecified(parseResult, Priority) ? parseResult.GetValue(Priority) : (__requestBase is { } __PriorityBaseValue ? __PriorityBaseValue.Priority : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
