@@ -103,7 +103,7 @@ internal static partial class AddGlossaryCommandApiCommand
                             cancellationToken).ConfigureAwait(false);
                         var id = parseResult.GetRequiredValue(Id);
                         var type = parseResult.GetRequiredValue(Type);
-                        var tuid = CliRuntime.WasSpecified(parseResult, Tuid) ? parseResult.GetValue(Tuid) : __requestBase is not null ? __requestBase.Tuid : default;
+                        var tuid = CliRuntime.WasSpecified(parseResult, Tuid) ? parseResult.GetValue(Tuid) : (__requestBase is { } __TuidBaseValue ? __TuidBaseValue.Tuid : default);
                         var terms = parseResult.GetRequiredValue(Terms);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 

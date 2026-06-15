@@ -136,12 +136,12 @@ internal static partial class TranslateCommandApiCommand
                         var source = parseResult.GetRequiredValue(Source);
                         var target = parseResult.GetRequiredValue(Target);
                         var q = parseResult.GetRequiredValue(Q);
-                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : __requestBase is not null ? __requestBase.Hints : default;
-                        var priority = CliRuntime.WasSpecified(parseResult, Priority) ? parseResult.GetValue(Priority) : __requestBase is not null ? __requestBase.Priority : default;
-                        var multiline = CliRuntime.WasSpecified(parseResult, Multiline) ? parseResult.GetValue(Multiline) : __requestBase is not null ? __requestBase.Multiline : default;
-                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : __requestBase is not null ? __requestBase.Format : default;
-                        var altTranslations = CliRuntime.WasSpecified(parseResult, AltTranslations) ? parseResult.GetValue(AltTranslations) : __requestBase is not null ? __requestBase.AltTranslations : default;
-                        var maskProfanities = CliRuntime.WasSpecified(parseResult, MaskProfanities) ? parseResult.GetValue(MaskProfanities) : __requestBase is not null ? __requestBase.MaskProfanities : default;
+                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : (__requestBase is { } __HintsBaseValue ? __HintsBaseValue.Hints : default);
+                        var priority = CliRuntime.WasSpecified(parseResult, Priority) ? parseResult.GetValue(Priority) : (__requestBase is { } __PriorityBaseValue ? __PriorityBaseValue.Priority : default);
+                        var multiline = CliRuntime.WasSpecified(parseResult, Multiline) ? parseResult.GetValue(Multiline) : (__requestBase is { } __MultilineBaseValue ? __MultilineBaseValue.Multiline : default);
+                        var format = CliRuntime.WasSpecified(parseResult, Format) ? parseResult.GetValue(Format) : (__requestBase is { } __FormatBaseValue ? __FormatBaseValue.Format : default);
+                        var altTranslations = CliRuntime.WasSpecified(parseResult, AltTranslations) ? parseResult.GetValue(AltTranslations) : (__requestBase is { } __AltTranslationsBaseValue ? __AltTranslationsBaseValue.AltTranslations : default);
+                        var maskProfanities = CliRuntime.WasSpecified(parseResult, MaskProfanities) ? parseResult.GetValue(MaskProfanities) : (__requestBase is { } __MaskProfanitiesBaseValue ? __MaskProfanitiesBaseValue.MaskProfanities : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
