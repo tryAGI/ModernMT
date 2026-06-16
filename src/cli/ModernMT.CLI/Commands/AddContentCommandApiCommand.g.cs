@@ -129,8 +129,8 @@ internal static partial class AddContentCommandApiCommand
                         var target = parseResult.GetRequiredValue(Target);
                         var sentence = parseResult.GetRequiredValue(Sentence);
                         var translation = parseResult.GetRequiredValue(Translation);
-                        var tuid = CliRuntime.WasSpecified(parseResult, Tuid) ? parseResult.GetValue(Tuid) : __requestBase is not null ? __requestBase.Tuid : default;
-                        var session = CliRuntime.WasSpecified(parseResult, Session) ? parseResult.GetValue(Session) : __requestBase is not null ? __requestBase.Session : default;
+                        var tuid = CliRuntime.WasSpecified(parseResult, Tuid) ? parseResult.GetValue(Tuid) : (__requestBase is { } __TuidBaseValue ? __TuidBaseValue.Tuid : default);
+                        var session = CliRuntime.WasSpecified(parseResult, Session) ? parseResult.GetValue(Session) : (__requestBase is { } __SessionBaseValue ? __SessionBaseValue.Session : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

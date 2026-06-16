@@ -93,8 +93,8 @@ internal static partial class CreateMemoryCommandApiCommand
                             global::ModernMT.SourceGenerationContext.Default,
                             cancellationToken).ConfigureAwait(false);
                         var name = parseResult.GetRequiredValue(NameOption);
-                        var description = CliRuntime.WasSpecified(parseResult, DescriptionOption) ? parseResult.GetValue(DescriptionOption) : __requestBase is not null ? __requestBase.Description : default;
-                        var externalId = CliRuntime.WasSpecified(parseResult, ExternalId) ? parseResult.GetValue(ExternalId) : __requestBase is not null ? __requestBase.ExternalId : default;
+                        var description = CliRuntime.WasSpecified(parseResult, DescriptionOption) ? parseResult.GetValue(DescriptionOption) : (__requestBase is { } __DescriptionBaseValue ? __DescriptionBaseValue.Description : default);
+                        var externalId = CliRuntime.WasSpecified(parseResult, ExternalId) ? parseResult.GetValue(ExternalId) : (__requestBase is { } __ExternalIdBaseValue ? __ExternalIdBaseValue.ExternalId : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 

@@ -112,8 +112,8 @@ internal static partial class GetContextVectorCommandApiCommand
                         var source = parseResult.GetRequiredValue(Source);
                         var targets = parseResult.GetRequiredValue(Targets);
                         var text = parseResult.GetRequiredValue(Text);
-                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : __requestBase is not null ? __requestBase.Hints : default;
-                        var limit = CliRuntime.WasSpecified(parseResult, Limit) ? parseResult.GetValue(Limit) : __requestBase is not null ? __requestBase.Limit : default;
+                        var hints = CliRuntime.WasSpecified(parseResult, Hints) ? parseResult.GetValue(Hints) : (__requestBase is { } __HintsBaseValue ? __HintsBaseValue.Hints : default);
+                        var limit = CliRuntime.WasSpecified(parseResult, Limit) ? parseResult.GetValue(Limit) : (__requestBase is { } __LimitBaseValue ? __LimitBaseValue.Limit : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
