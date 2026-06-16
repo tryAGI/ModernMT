@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
-dotnet tool install --global autosdk.cli --prerelease
+install_autosdk_cli() {
+  dotnet tool update --global autosdk.cli --prerelease >/dev/null 2>&1 || \
+    dotnet tool install --global autosdk.cli --prerelease
+}
+
+install_autosdk_cli
 rm -rf Generated
 # Spec is manually maintained in openapi.yaml (no public spec exists)
 # Auth: ModernMT uses MMT-ApiKey header.
