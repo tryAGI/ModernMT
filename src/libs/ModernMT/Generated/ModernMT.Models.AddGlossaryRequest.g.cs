@@ -4,12 +4,12 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class AddGlossaryRequest
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("type")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::ModernMT.JsonConverters.AddGlossaryRequestTypeJsonConverter))]
@@ -17,13 +17,13 @@ namespace ModernMT
         public required global::ModernMT.AddGlossaryRequestType Type { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("tuid")]
         public string? Tuid { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("terms")]
         [global::System.Text.Json.Serialization.JsonRequired]

@@ -4,7 +4,7 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class DetectLanguageRequest
     {
@@ -16,7 +16,7 @@ namespace ModernMT
         public required string Q { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("format")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::ModernMT.JsonConverters.DetectLanguageRequestFormatJsonConverter))]

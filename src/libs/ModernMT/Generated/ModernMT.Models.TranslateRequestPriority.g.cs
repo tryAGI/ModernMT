@@ -9,11 +9,11 @@ namespace ModernMT
     public enum TranslateRequestPriority
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Background,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Normal,
     }

@@ -4,16 +4,16 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum AddGlossaryRequestType
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Equivalent,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Unidirectional,
     }
