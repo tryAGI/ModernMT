@@ -4,16 +4,16 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum BatchTranslateRequestPriority
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Background,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Normal,
     }

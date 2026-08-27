@@ -4,7 +4,7 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class ContextVectorResponseDataVectors
     {

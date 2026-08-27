@@ -124,7 +124,7 @@ namespace ModernMT
                          __authorization.Location == "Header")
                 {
                     __httpRequest.Headers.Add(__authorization.Name, __authorization.Value);
-                } 
+                }
             }
                 global::ModernMT.AutoSDKRequestOptionsSupport.ApplyHeaders(
                     request: __httpRequest,

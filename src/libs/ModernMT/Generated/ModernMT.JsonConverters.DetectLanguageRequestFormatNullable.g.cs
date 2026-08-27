@@ -20,7 +20,7 @@ namespace ModernMT.JsonConverters
                     {
                         return global::ModernMT.DetectLanguageRequestFormatExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

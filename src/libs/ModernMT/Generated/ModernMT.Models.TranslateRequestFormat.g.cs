@@ -9,11 +9,11 @@ namespace ModernMT
     public enum TranslateRequestFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Html,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
     }

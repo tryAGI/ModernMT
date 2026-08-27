@@ -11,7 +11,7 @@ namespace ModernMT
     public sealed partial class ModernMTClient : global::ModernMT.IModernMTClient, global::System.IDisposable
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public const string DefaultBaseUrl = "https://api.modernmt.com/";
 
@@ -38,7 +38,7 @@ namespace ModernMT
         internal global::System.Lazy<global::System.Text.Json.Serialization.JsonSerializerContext> JsonSerializerContextProvider { get; set; } = new(() => global::ModernMT.SourceGenerationContext.Default);
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public global::System.Text.Json.Serialization.JsonSerializerContext JsonSerializerContext
         {

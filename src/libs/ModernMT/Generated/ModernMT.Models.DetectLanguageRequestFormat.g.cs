@@ -4,16 +4,16 @@
 namespace ModernMT
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum DetectLanguageRequestFormat
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Html,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Text,
     }
