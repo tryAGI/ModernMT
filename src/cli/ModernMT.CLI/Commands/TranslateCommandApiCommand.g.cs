@@ -98,9 +98,9 @@ internal static partial class TranslateCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"translate", @"Translate text");
+        var command = new Command(commandName ?? @"translate", @"Translate text");
                         command.Options.Add(Source);
                         command.Options.Add(Target);
                         command.Options.Add(Q);

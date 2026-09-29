@@ -63,9 +63,9 @@ internal static partial class UpdateMemoryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"update-memory", @"Update a translation memory");
+        var command = new Command(commandName ?? @"update-memory", @"Update a translation memory");
                         command.Arguments.Add(Id);
                         command.Options.Add(NameOption);
                         command.Options.Add(DescriptionOption);

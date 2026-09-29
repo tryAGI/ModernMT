@@ -71,9 +71,9 @@ internal static partial class AddGlossaryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"add-glossary", @"Add glossary terms to a memory");
+        var command = new Command(commandName ?? @"add-glossary", @"Add glossary terms to a memory");
                         command.Arguments.Add(Id);
                         command.Options.Add(Type);
                         command.Options.Add(Tuid);

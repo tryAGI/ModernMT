@@ -91,9 +91,9 @@ internal static partial class TranslateBatchCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"translate-batch", @"Submit batch translation");
+        var command = new Command(commandName ?? @"translate-batch", @"Submit batch translation");
                         command.Options.Add(Source);
                         command.Options.Add(Target);
                         command.Options.Add(Q);

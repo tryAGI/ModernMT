@@ -31,9 +31,9 @@ internal static partial class ListLanguagesCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-languages", @"List supported languages");
+        var command = new Command(commandName ?? @"list-languages", @"List supported languages");
 
 
 

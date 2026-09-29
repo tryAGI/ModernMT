@@ -35,9 +35,9 @@ internal static partial class GetImportJobCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-import-job", @"Get import job status");
+        var command = new Command(commandName ?? @"get-import-job", @"Get import job status");
                         command.Arguments.Add(Id);
 
 

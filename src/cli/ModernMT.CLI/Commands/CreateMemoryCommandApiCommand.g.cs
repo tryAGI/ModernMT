@@ -63,9 +63,9 @@ internal static partial class CreateMemoryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-memory", @"Create a translation memory");
+        var command = new Command(commandName ?? @"create-memory", @"Create a translation memory");
                         command.Arguments.Add(NameOption);
                         command.Options.Add(DescriptionOption);
                         command.Options.Add(ExternalId);

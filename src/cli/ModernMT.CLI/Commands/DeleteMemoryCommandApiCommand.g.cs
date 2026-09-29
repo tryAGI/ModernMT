@@ -35,9 +35,9 @@ internal static partial class DeleteMemoryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"delete-memory", @"Delete a translation memory");
+        var command = new Command(commandName ?? @"delete-memory", @"Delete a translation memory");
                         command.Arguments.Add(Id);
 
 

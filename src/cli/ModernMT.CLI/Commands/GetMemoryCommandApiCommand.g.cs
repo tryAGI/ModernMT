@@ -35,9 +35,9 @@ internal static partial class GetMemoryCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-memory", @"Get a translation memory");
+        var command = new Command(commandName ?? @"get-memory", @"Get a translation memory");
                         command.Arguments.Add(Id);
 
 
