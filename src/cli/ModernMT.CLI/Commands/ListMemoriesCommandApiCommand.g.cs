@@ -31,9 +31,9 @@ internal static partial class ListMemoriesCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-memories", @"List translation memories");
+        var command = new Command(commandName ?? @"list-memories", @"List translation memories");
 
 
 

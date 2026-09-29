@@ -91,9 +91,9 @@ internal static partial class AddContentCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"add-content", @"Add content to a translation memory");
+        var command = new Command(commandName ?? @"add-content", @"Add content to a translation memory");
                         command.Arguments.Add(Id);
                         command.Options.Add(Source);
                         command.Options.Add(Target);

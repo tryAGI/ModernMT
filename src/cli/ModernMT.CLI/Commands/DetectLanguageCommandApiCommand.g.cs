@@ -58,9 +58,9 @@ internal static partial class DetectLanguageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"detect-language", @"Detect language of text");
+        var command = new Command(commandName ?? @"detect-language", @"Detect language of text");
                         command.Options.Add(Q);
                         command.Options.Add(Format);
           command.Options.Add(Input);

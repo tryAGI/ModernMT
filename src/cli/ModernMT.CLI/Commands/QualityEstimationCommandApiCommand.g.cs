@@ -57,9 +57,9 @@ internal static partial class QualityEstimationCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"quality-estimation", @"Estimate translation quality");
+        var command = new Command(commandName ?? @"quality-estimation", @"Estimate translation quality");
                         command.Options.Add(Source);
                         command.Options.Add(Target);
                         command.Options.Add(Sentence);

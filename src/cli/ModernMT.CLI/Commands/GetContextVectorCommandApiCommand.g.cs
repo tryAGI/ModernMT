@@ -78,9 +78,9 @@ internal static partial class GetContextVectorCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-context-vector", @"Generate context vector for adaptive translation");
+        var command = new Command(commandName ?? @"get-context-vector", @"Generate context vector for adaptive translation");
                         command.Options.Add(Source);
                         command.Options.Add(Targets);
                         command.Options.Add(Text);
