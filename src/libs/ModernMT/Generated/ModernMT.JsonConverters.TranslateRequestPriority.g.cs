@@ -18,7 +18,7 @@ namespace ModernMT.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::ModernMT.TranslateRequestPriorityExtensions.ToEnum(stringValue) ?? default;
+                        return global::ModernMT.TranslateRequestPriorityExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::ModernMT.TranslateRequestPriority.");
                     }
 
                     break;
